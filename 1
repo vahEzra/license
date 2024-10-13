@@ -2,19 +2,28 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-valid_license_keys = ["999-999-999"]  # Add more valid keys as needed
+def validate_macsploit_license(license_key):
+  """Validates a Mac.run license key.
 
-def validate_license(license_key):
-  if license_key in valid_license_keys:
+  Args:
+    license_key: The MacSploit license key to validate.
+
+  Returns:
+    True if the license key is valid, False otherwise.
+  """
+
+  # Replace with your actual license key validation logic
+  valid_license_key = "999-999-999"  # Adjust the valid license key as needed
+  if license_key == valid_license_key:
     return True
   else:
     return False
 
-@app.route('/validate_license', methods=['POST'])
+@app.route('/validate_macsploit_license', methods=['POST'])
 def validate_license_endpoint():
   license_key = request.json.get('key')
   if license_key:
-    is_valid = validate_license(license_key)
+    is_valid = validate_macsploit_license(license_key)
     if is_valid:
       return jsonify({'success': True})
     else:
